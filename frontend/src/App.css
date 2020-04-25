@@ -3,3 +3,73 @@
    box-sizing: border-box;
    padding: 0;
 }
+
+body {
+   padding-top: 7vh;
+   background: #fafafa;
+}
+
+.container {
+   padding: 0 10%;
+}
+
+/* ---------------------------HEADER----------------------------------- */
+
+.header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   height: 7vh;
+   border-bottom: 2px solid #aaa;
+   position: fixed;
+   top: 0;
+   width: 80%;
+   margin: auto;
+   flex-basis: 100%;
+   background: #fff;
+   backface-visibility: hidden;
+}
+
+.header-search-input {
+   padding: 0.5em;
+   margin-left: 1em;
+   background: #fafafa;
+   border: 1px solid #dbdbdb;
+   color: #262626;
+}
+
+.header-search-input:focus {
+   background: #fff;
+   outline: 1px solid #ccc;
+   color: #222;
+}
+
+.header-search-submit {
+   border: 0;
+   background: #069;
+   color: #fff;
+   width: 60px;
+   height: 2.4em;
+   cursor: pointer;
+   transition: 0.4s;
+}
+
+.header-search-submit:hover {
+   background-color: rgb(0, 69, 104);
+}
+
+.header-nav {
+   list-style: none;
+}
+
+.header-nav-item a {
+   text-decoration: none;
+   color: #069;
+   font-size: 3em;
+}
+
+.header-nav-item a:hover {
+   color: rgb(0, 69, 104);
+}
+
+/* ---------------------------PHOTO----------------------------------- */
