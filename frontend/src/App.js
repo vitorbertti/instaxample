@@ -34,9 +34,9 @@ function App() {
             <div className="photos-container">
                <div className="photo">
                   <header className="photo-header">
-                     <figure className="user-photo">
+                     <figure className="photo-user">
                         <img src="" alt="User Photo" />
-                        <figcaption className="user-photo">
+                        <figcaption className="photo-user">
                            <a href="#">Test</a>
                         </figcaption>
                      </figure>
