@@ -5,10 +5,12 @@ const PhotoSchema = new mongoose.Schema(
    {
       photo: String,
       date: Date,
-      comment: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: 'Comment',
-      },
+      comment: [
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+         },
+      ],
       user: {
          type: mongoose.Schema.Types.ObjectId,
          ref: 'User',

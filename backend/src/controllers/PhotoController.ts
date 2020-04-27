@@ -10,7 +10,6 @@ export default {
 
    async store(req: Request, res: Response) {
       const { filename } = req.file;
-      // const { comment } = req.body;
       const { user_id } = req.headers;
       const date = new Date();
 
@@ -27,7 +26,7 @@ export default {
       const photo = await Photo.create({
          photo: filename,
          date,
-         user: user_id,
+         user,
       });
 
       return res.json(photo);
