@@ -11,16 +11,16 @@ export default {
    async create(req: Request, res: Response) {
       const { filename } = req.file;
       const { comment } = req.body;
-      const { user_id } = req.headers;
+      // const { user_id } = req.headers;
 
-      const user = await User.findById(user_id);
+      // const user = await User.findById(user_id);
 
-      if (!user) {
-         return res.status(400).json({ error: 'User does not exist' });
-      }
+      // if (!user) {
+      //    return res.status(400).json({ error: 'User does not exist' });
+      // }
 
       const spot = await Photo.create({
-         user: user_id,
+         // user: user_id,
          photo: filename,
          comment,
       });

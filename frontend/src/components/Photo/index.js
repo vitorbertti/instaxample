@@ -1,11 +1,12 @@
 import React from 'react';
 import './styles.css';
 
-function PhotoHeader() {
+function PhotoHeader(props) {
+   console.log(props);
    return (
       <header className="photo-header">
          <figure className="photo-user">
-            <img src="" alt="User Photo" />
+            <img src={props.photo.photo.photo_url} alt="User Photo" />
             <figcaption className="photo-user">
                <a href="#">Test</a>
             </figcaption>
@@ -15,7 +16,7 @@ function PhotoHeader() {
    );
 }
 
-function PhotoInfo() {
+function PhotoInfo(props) {
    return (
       <div className="photo-info">
          <div className="photo-info-likes">
@@ -40,7 +41,7 @@ function PhotoInfo() {
             </li>
             <li className="comments">
                <a className="photo-info-author">follower </a>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.
+               {props.photo.photo.comment}
             </li>
          </ul>
       </div>
@@ -69,14 +70,14 @@ function PhotoUpdate() {
    );
 }
 
-function Photo() {
+function Photo(props) {
    return (
       <div className="photo">
-         <PhotoHeader />
+         <PhotoHeader photo={props} />
 
-         <img src="" alt="Photo" className="photo-src" />
+         <img src={props.photo.photo_url} alt="Photo" className="photo-src" />
 
-         <PhotoInfo />
+         <PhotoInfo photo={props} />
          <PhotoUpdate />
       </div>
    );

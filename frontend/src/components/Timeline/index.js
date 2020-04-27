@@ -5,20 +5,23 @@ import './styles.css';
 import api from '../../services/api';
 
 function Timeline() {
-   const [photos, setPhotos] = useState({});
+   const [photos, setPhotos] = useState([]);
 
    useEffect(() => {
-      api.get('user')
-         .then((response) => response.json())
-         .then((photos) => setPhotos(photos));
+      async function loadPhotos() {
+         const response = await api.get('/photos');
+
+         setPhotos(response.data);
+      }
+
+      loadPhotos();
    }, []);
 
    return (
       <div className="photos-container">
-         {photos.map((photo) => (
-            <Photo photo={photo} />
+         {photos.map((photo, key) => (
+            <Photo key={key} photo={photo} />
          ))}
-         <Photo />
       </div>
    );
 }

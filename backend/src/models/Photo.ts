@@ -16,10 +16,10 @@ const PhotoSchema = new mongoose.Schema(
       photo: String,
       time: Date,
       comment: String,
-      user: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: 'User',
-      },
+      // user: {
+      //    type: mongoose.Schema.Types.ObjectId,
+      //    ref: 'User',
+      // },
    },
    {
       toJSON: {
