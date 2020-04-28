@@ -35,6 +35,7 @@ export default {
          return res.status(400).json({ error: 'User does not exist' });
       }
 
+      const username = user.username;
       const { text } = req.body;
 
       if (!text) {
@@ -45,6 +46,7 @@ export default {
          user,
          photo,
          text,
+         username,
       });
 
       await Photo.update({ _id: photo_id }, { $push: { comment } });

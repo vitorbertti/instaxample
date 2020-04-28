@@ -11,6 +11,7 @@ export default {
    async store(req: Request, res: Response) {
       const { filename } = req.file;
       const { user_id } = req.headers;
+      const { description } = req.body;
       const date = new Date();
 
       const user = await User.findById(user_id);
@@ -23,9 +24,17 @@ export default {
          return res.status(400).json({ error: 'User does not exist' });
       }
 
+      const username = user.username;
+      const profile_photo = user.profile_photo;
+      const profile_url = user.profile_url;
+
       const photo = await Photo.create({
          photo: filename,
          date,
+         description,
+         username,
+         profile_photo,
+         profile_url,
          user,
       });
 
