@@ -40,4 +40,15 @@ export default {
 
       return res.json(photo);
    },
+
+   async destroy(req: Request, res: Response) {
+      const { photo_id } = req.headers;
+
+      if (!photo_id) {
+         return res.status(400).json({ error: 'Photo does not exist' });
+      }
+
+      await Photo.findByIdAndRemove(photo_id);
+      return res.status(200).json('The photo was deleted');
+   },
 };

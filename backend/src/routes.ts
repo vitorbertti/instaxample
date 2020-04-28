@@ -15,8 +15,10 @@ routes.post('/users', upload.single('profilePhoto'), UserController.store);
 
 routes.get('/photos', PhotoController.index);
 routes.post('/photos', upload.single('photo'), PhotoController.store);
+routes.delete('/photos', PhotoController.destroy);
 
 routes.get('/comments', CommentController.index);
 routes.post('/comments', CommentController.store);
+routes.delete('/comments', CommentController.destroy);
 
 export default routes;

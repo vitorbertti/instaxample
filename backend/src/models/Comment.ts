@@ -3,14 +3,8 @@ import mongoose from 'mongoose';
 interface CommentInterface extends mongoose.Document {
    text: String;
    username: String;
-   user: {
-      type: mongoose.Schema.Types.ObjectId;
-      ref: 'User';
-   };
-   photo: {
-      type: mongoose.Schema.Types.ObjectId;
-      ref: 'Photo';
-   };
+   user: String;
+   photo: String;
 }
 
 const CommentSchema = new mongoose.Schema({

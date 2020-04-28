@@ -14,7 +14,7 @@ export default {
          return res.status(400).json({ error: 'Photo does not exist' });
       }
 
-      const response = await Comment.find({ photo: photo_id });
+      const response = await Comment.find({ photo: <String>photo_id });
 
       return res.json(response);
    },
@@ -52,5 +52,16 @@ export default {
       await Photo.update({ _id: photo_id }, { $push: { comment } });
 
       return res.json(comment);
+   },
+
+   async destroy(req: Request, res: Response) {
+      const { comment_id } = req.headers;
+
+      if (!comment_id) {
+         return res.status(400).json({ error: 'Comment does not exist' });
+      }
+
+      await Comment.findByIdAndRemove(comment_id);
+      return res.status(200).json('The comment was deleted');
    },
 };

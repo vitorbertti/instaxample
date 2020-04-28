@@ -12,16 +12,10 @@ interface PhotoInterface extends mongoose.Document {
       {
          text: String;
          username: String;
-         user: {
-            type: mongoose.Schema.Types.ObjectId;
-            ref: 'User';
-         };
+         user: String;
       }
    ];
-   user: {
-      type: mongoose.Schema.Types.ObjectId;
-      ref: 'User';
-   };
+   user: String;
 }
 
 const PhotoSchema = new mongoose.Schema(
