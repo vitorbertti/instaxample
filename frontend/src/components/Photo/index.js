@@ -2,13 +2,12 @@ import React from 'react';
 import './styles.css';
 
 function PhotoHeader(props) {
-   console.log(props);
    return (
       <header className="photo-header">
          <figure className="photo-user">
-            <img src={props.photo.photo.photo_url} alt="User Photo" />
+            <img src={props.photo.profile_url} alt="User Photo" />
             <figcaption className="photo-user">
-               <a href="#">Test</a>
+               <a href="#">{props.photo.username}</a>
             </figcaption>
          </figure>
          <time className="photo-date">01/01/2020 01:01</time>
@@ -26,23 +25,19 @@ function PhotoInfo(props) {
          </div>
 
          <p className="photo-info-caption">
-            <a className="photo-info-author">author </a>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <a className="photo-info-author">{props.photo.username} </a>
+            {props.photo.description}
          </p>
 
          <ul className="photo-info-comments">
-            <li className="comments">
-               <a className="photo-info-author">follower </a>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </li>
-            <li className="comments">
-               <a className="photo-info-author">follower </a>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </li>
-            <li className="comments">
-               <a className="photo-info-author">follower </a>
-               {props.photo.photo.comment}
-            </li>
+            {props.photo.comment.map((comment) => {
+               return (
+                  <li className="comments">
+                     <a className="photo-info-author">{comment.username} </a>
+                     {comment.text}
+                  </li>
+               );
+            })}
          </ul>
       </div>
    );
@@ -71,14 +66,15 @@ function PhotoUpdate() {
 }
 
 function Photo(props) {
+   console.log(props);
    return (
       <div className="photo">
-         <PhotoHeader photo={props} />
+         <PhotoHeader photo={props.photo} />
 
          <img src={props.photo.photo_url} alt="Photo" className="photo-src" />
 
-         <PhotoInfo photo={props} />
-         <PhotoUpdate />
+         <PhotoInfo photo={props.photo} />
+         <PhotoUpdate photo={props.photo} />
       </div>
    );
 }

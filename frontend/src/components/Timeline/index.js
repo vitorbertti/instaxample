@@ -10,7 +10,6 @@ function Timeline() {
    useEffect(() => {
       async function loadPhotos() {
          const response = await api.get('/photos');
-
          setPhotos(response.data);
       }
 
