@@ -4,12 +4,14 @@ interface UserInterface extends mongoose.Document {
    username: String;
    profile_photo: String;
    profile_url: String;
+   password: String;
 }
 
 const UserSchema = new mongoose.Schema(
    {
       username: String,
-      profile_photo: String,
+      profile: String,
+      password: String,
    },
    {
       toJSON: {
@@ -19,7 +21,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.virtual('profile_url').get(function (this: any) {
-   return `${process.env.URI}/files/${this.photo}`;
+   return `${process.env.URI}/files/${this.profile}`;
 });
 
 export default mongoose.model<UserInterface>('User', UserSchema);
