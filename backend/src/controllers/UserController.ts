@@ -4,12 +4,12 @@ import User from '../models/User';
 
 export default {
    async index(req: Request, res: Response) {
-      const { username } = req.body;
-      const { password } = req.body;
+      const { username } = req.headers;
+      const { password } = req.headers;
 
       const users = await User.findOne({
-         username: username,
-         password: password,
+         username: <String>username,
+         password: <String>password,
       });
 
       return res.json(users);

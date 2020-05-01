@@ -8,6 +8,11 @@
    padding: 1em;
 }
 
+.header-logo-message {
+   color: #d11717;
+   font-weight: bold;
+}
+
 .login-box input {
    display: block;
    border-radius: 5px;

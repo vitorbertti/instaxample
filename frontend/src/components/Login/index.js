@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
+
 import api from '../../services/api';
 import './styles.css';
 
-function Login() {
+function Login({ history }) {
    const [message, setMessage] = useState('');
+   const [user, setUser] = useState('');
+   const [pass, setPass] = useState('');
 
    async function handleSubmit(e) {
       e.preventDefault();
-      const response = await api.post('/login');
-      if (response.ok) {
-         return response.text();
+
+      const response = await api.get('/users', {
+         headers: { username: user.value, password: pass.value },
+      });
+
+      console.log(response);
+
+      if (response.data != null) {
+         history.push(`/timeline`);
+         // return response.text();
       } else {
          setMessage('User does not found');
       }
@@ -18,18 +28,18 @@ function Login() {
    return (
       <div className="login-box">
          <h1 className="header-logo">Instaxample</h1>
-         <span>{message}</span>
+         <span className="header-logo-message">{message}</span>
          <form onSubmit={handleSubmit}>
             <input
                type="text"
                ref={(input) => {
-                  const login = input;
+                  setUser(input);
                }}
             />
             <input
                type="password"
                ref={(input) => {
-                  const password = input;
+                  setPass(input);
                }}
             />
             <input type="submit" value="Sign up" />
