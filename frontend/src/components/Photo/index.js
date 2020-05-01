@@ -19,7 +19,13 @@ function PhotoInfo(props) {
    return (
       <div className="photo-info">
          <div className="photo-info-likes">
-            <a href="#">test_ssa </a>
+            {props.photo.like.map((like) => {
+               return (
+                  <a key={like.id} href="#">
+                     {like.username}{' '}
+                  </a>
+               );
+            })}
             <a href="#">test_aaaa </a>
             Liked
          </div>
@@ -32,7 +38,7 @@ function PhotoInfo(props) {
          <ul className="photo-info-comments">
             {props.photo.comment.map((comment) => {
                return (
-                  <li className="comments">
+                  <li key={comment.id} className="comments">
                      <a className="photo-info-author">{comment.username} </a>
                      {comment.text}
                   </li>
@@ -66,7 +72,6 @@ function PhotoUpdate() {
 }
 
 function Photo(props) {
-   console.log(props);
    return (
       <div className="photo">
          <PhotoHeader photo={props.photo} />

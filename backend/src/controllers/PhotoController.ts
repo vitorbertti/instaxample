@@ -4,7 +4,9 @@ import User from '../models/User';
 
 export default {
    async index(req: Request, res: Response) {
-      const data = await Photo.find();
+      const { user_id } = req.headers;
+
+      const data = await Photo.find({ user: <String>user_id });
       res.json(data);
    },
 

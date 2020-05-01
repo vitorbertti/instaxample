@@ -15,11 +15,9 @@ function Login({ history }) {
          headers: { username: user.value, password: pass.value },
       });
 
-      console.log(response);
-
       if (response.data != null) {
-         history.push(`/timeline`);
-         // return response.text();
+         const { _id } = response.data;
+         history.push(`/timeline/${_id}`);
       } else {
          setMessage('User does not found');
       }
