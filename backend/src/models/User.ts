@@ -5,6 +5,11 @@ interface UserInterface extends mongoose.Document {
    profile_photo: String;
    profile_url: String;
    password: String;
+   friend: [
+      {
+         _id: String;
+      }
+   ];
 }
 
 const UserSchema = new mongoose.Schema(
@@ -12,6 +17,14 @@ const UserSchema = new mongoose.Schema(
       username: String,
       profile: String,
       password: String,
+      friend: [
+         {
+            user: {
+               type: mongoose.Schema.Types.ObjectId,
+               ref: 'User',
+            },
+         },
+      ],
    },
    {
       toJSON: {

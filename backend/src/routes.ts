@@ -13,6 +13,8 @@ const routes = Router();
 
 routes.get('/users', UserController.index);
 routes.post('/users', upload.single('profilePhoto'), UserController.store);
+routes.put('/users', UserController.update);
+routes.put('/users/:friend_id', UserController.removeFriend);
 routes.delete('/users', UserController.destroy);
 
 routes.get('/photos', PhotoController.index);
