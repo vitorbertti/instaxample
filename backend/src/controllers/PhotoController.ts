@@ -11,21 +11,26 @@ export default {
       if (user) {
          const friends = user.friend;
 
-         await Photo.find({}, async () => {
-            var response: any[] = [];
-            response.push(await Photo.find({ user: <String>user_id }));
-            if (friends.length) {
-               friends.forEach((friend) => {
-                  response.push(Photo.find({ user: <String>friend._id }));
-               });
+         if (friends.length) {
+            friends.push(user._id);
 
-               Promise.all(response).then((data) => {
-                  res.json(data);
+            var data: any[] = [];
+
+            await Photo.find({}, () => {
+               friends.forEach((friend) => {
+                  data.push(Photo.find({ user: <String>friend._id }));
                });
-            } else {
-               res.json(response);
-            }
-         }).sort({ date: 'desc' });
+            }).sort({ date: 'desc' });
+
+            Promise.all(data).then((response) => {
+               return res.json(response);
+            });
+         } else {
+            const response = await Photo.find({ user: <String>user_id }).sort({
+               date: 'desc',
+            });
+            return res.json(response);
+         }
       } else {
          return res.status(400).json({ error: 'User does not exist' });
       }
