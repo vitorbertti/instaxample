@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
+
+import api from '../../services/api';
 
 function PhotoHeader(props) {
    return (
@@ -7,10 +10,12 @@ function PhotoHeader(props) {
          <figure className="photo-user">
             <img src={props.photo.profile_url} alt="User Photo" />
             <figcaption className="photo-user">
-               <a href="#">{props.photo.username}</a>
+               <Link to={`/timeline/${props.photo.user}`}>
+                  {props.photo.username}
+               </Link>
             </figcaption>
          </figure>
-         <time className="photo-date">01/01/2020 01:01</time>
+         <time className="photo-date">{props.photo.date}</time>
       </header>
    );
 }
@@ -21,17 +26,21 @@ function PhotoInfo(props) {
          <div className="photo-info-likes">
             {props.photo.like.map((like) => {
                return (
-                  <a key={like.id} href="#">
+                  <Link key={like.id} to={`/timeline/${like.user}`}>
                      {like.username}{' '}
-                  </a>
+                  </Link>
                );
             })}
-            <a href="#">test_aaaa </a>
             Liked
          </div>
 
          <p className="photo-info-caption">
-            <a className="photo-info-author">{props.photo.username} </a>
+            <Link
+               to={`/timeline/${props.photo.user}`}
+               className="photo-info-author"
+            >
+               {props.photo.username}{' '}
+            </Link>
             {props.photo.description}
          </p>
 
@@ -39,7 +48,12 @@ function PhotoInfo(props) {
             {props.photo.comment.map((comment) => {
                return (
                   <li key={comment.id} className="comments">
-                     <a className="photo-info-author">{comment.username} </a>
+                     <Link
+                        to={`/timeline/${comment.user}`}
+                        className="photo-info-author"
+                     >
+                        {comment.username}{' '}
+                     </Link>
                      {comment.text}
                   </li>
                );
@@ -49,10 +63,26 @@ function PhotoInfo(props) {
    );
 }
 
-function PhotoUpdate() {
+function PhotoUpdate(props) {
+   const [liked, setLiked] = useState(props.photo.liked);
+   function setLike(e) {
+      e.preventDefault();
+      api.post('/likes', {
+         headers: {
+            photo_id: props.photo._id,
+            user_id: props.photo.user,
+         },
+      }).then((response) => {
+         setLiked(!liked);
+      });
+   }
+
    return (
       <section className="photo-update">
-         <a href="" className="photo-update-like">
+         <a
+            onClick={setLike}
+            className={liked ? 'photo-update-like-active' : 'photo-update-like'}
+         >
             Like
          </a>
          <form action="" className="photo-update-form">

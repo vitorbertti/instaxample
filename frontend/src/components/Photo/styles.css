@@ -32,6 +32,7 @@
 .photo-user a {
    text-decoration: none;
    color: var(--main-link-color);
+   margin-left: 5em;
 }
 
 .photo-date {
@@ -62,6 +63,8 @@
 
 .photo-info-author {
    font-weight: bold;
+   text-decoration: none;
+   color: var(--main-link-color);
 }
 
 .photo-info-comments {
@@ -82,7 +85,7 @@
 }
 
 .photo-update-like {
-   background: url('../../assets//like.png') no-repeat center center;
+   background: url('../../assets/like.png') no-repeat center center;
    background-size: 32px 32px;
    width: 44px;
    height: 44px;
@@ -90,10 +93,27 @@
    display: inline-block;
    transition: 0.4s;
    margin-right: 1em;
+   cursor: pointer;
 }
 
 .photo-update-like:hover {
    background-image: url('../../assets/like-check.png');
+}
+
+.photo-update-like-active {
+   background: url('../../assets/like-check.png') no-repeat center center;
+   background-size: 32px 32px;
+   width: 44px;
+   height: 44px;
+   text-indent: -9999px;
+   display: inline-block;
+   transition: 0.4s;
+   margin-right: 1em;
+   cursor: pointer;
+}
+
+.photo-update-like-active:hover {
+   background-image: url('../../assets/like.png');
 }
 
 .photo-update-form {

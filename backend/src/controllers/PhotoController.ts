@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import Photo from '../models/Photo';
 import User from '../models/User';
 
+import dateFormat from 'dateformat';
+
 export default {
    async index(req: Request, res: Response) {
       const { user_id } = req.headers;
@@ -23,7 +25,7 @@ export default {
             }).sort({ date: 'desc' });
 
             Promise.all(data).then((response) => {
-               return res.json(response);
+               return res.json(response.flat());
             });
          } else {
             const response = await Photo.find({ user: <String>user_id }).sort({

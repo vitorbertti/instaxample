@@ -16,6 +16,7 @@ interface PhotoInterface extends mongoose.Document {
       }
    ];
    user: String;
+   liked: boolean;
    like: [
       {
          username: String;
@@ -32,6 +33,7 @@ const PhotoSchema = new mongoose.Schema(
       username: String,
       profile_photo: String,
       profile_url: String,
+      liked: Boolean,
       like: [
          {
             username: String,

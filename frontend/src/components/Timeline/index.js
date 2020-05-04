@@ -9,17 +9,18 @@ function Timeline() {
    const { id } = useParams();
 
    useEffect(() => {
-      async function loadPhotos() {
-         const response = await api.get('/photos', {
+      function loadPhotos() {
+         api.get('/photos', {
             headers: {
                user_id: id,
             },
+         }).then((response) => {
+            setPhotos(response.data);
          });
-         setPhotos(response.data);
       }
 
       loadPhotos();
-   }, []);
+   }, [id]);
 
    return (
       <div className="photos-container">
